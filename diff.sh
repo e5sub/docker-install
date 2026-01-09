@@ -41,7 +41,7 @@ TMP_DIR=$(mktemp -d)
 curl -sfSL "https://$SUBDOMAIN.docker.com" -o "$TMP_DIR/install.sh"
 
 echo "# Diff $CHANNEL install.sh"
-if ! diff --color=always -u "$TMP_DIR/install.sh" "build/$CHANNEL/install.sh"; then
+if ! diff -u "$TMP_DIR/install.sh" "build/$CHANNEL/install.sh"; then
     DIFF_FOUND=1
 fi
 
@@ -49,7 +49,7 @@ fi
 if [[ "$CHANNEL" == "stable" ]]; then
     curl -sfSL "https://$SUBDOMAIN.docker.com/rootless" -o "$TMP_DIR/rootless-install.sh"
     echo "# Diff $CHANNEL rootless-install.sh"
-    if ! diff --color=always -u "$TMP_DIR/rootless-install.sh" "build/$CHANNEL/rootless-install.sh"; then
+    if ! diff -u "$TMP_DIR/rootless-install.sh" "build/$CHANNEL/rootless-install.sh"; then
         DIFF_FOUND=1
     fi
 fi
