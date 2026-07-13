@@ -604,9 +604,9 @@ do_install() {
 						exit 1
 					fi
 					if version_gte "18.09"; then
-							search_command="apt-cache madison docker-ce-cli | grep '$pkg_pattern' | head -1 | awk '{\$1=\$1};1' | cut -d' ' -f 3"
-							echo "INFO: $search_command"
-							cli_pkg_version="=$($sh_c "$search_command")"
+						search_command="apt-cache madison docker-ce-cli | grep '$pkg_pattern' | head -1 | awk '{\$1=\$1};1' | cut -d' ' -f 3"
+						echo "INFO: $search_command"
+						cli_pkg_version="=$($sh_c "$search_command")"
 					fi
 					pkg_version="=$pkg_version"
 				fi
@@ -614,17 +614,17 @@ do_install() {
 			(
 				pkgs="docker-ce${pkg_version%=}"
 				if version_gte "18.09"; then
-						# older versions didn't ship the cli and containerd as separate packages
-						pkgs="$pkgs docker-ce-cli${cli_pkg_version%=} containerd.io"
+					# older versions didn't ship the cli and containerd as separate packages
+					pkgs="$pkgs docker-ce-cli${cli_pkg_version%=} containerd.io"
 				fi
 				if version_gte "20.10"; then
-						pkgs="$pkgs docker-compose-plugin docker-ce-rootless-extras$pkg_version"
+					pkgs="$pkgs docker-compose-plugin docker-ce-rootless-extras$pkg_version"
 				fi
 				if version_gte "23.0"; then
-						pkgs="$pkgs docker-buildx-plugin"
+					pkgs="$pkgs docker-buildx-plugin"
 				fi
 				if version_gte "28.2"; then
-						pkgs="$pkgs docker-model-plugin"
+					pkgs="$pkgs docker-model-plugin"
 				fi
 				if ! is_dry_run; then
 					set -x
