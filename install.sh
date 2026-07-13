@@ -587,6 +587,7 @@ do_install() {
 			fi
 
 			pkg_version=""
+			cli_pkg_version=""
 			if [ -n "$VERSION" ]; then
 				if is_dry_run; then
 					echo "# WARNING: VERSION pinning is not supported in DRY_RUN"
@@ -680,6 +681,7 @@ do_install() {
 			fi
 
 			pkg_version=""
+			cli_pkg_version=""
 			if command_exists dnf; then
 				pkg_manager="dnf"
 				pkg_manager_flags="-y -q --best"
